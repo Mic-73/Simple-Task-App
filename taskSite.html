@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Task App</title>
+    <link rel="stylesheet" href="taskSite.css">
+</head>
+<body>
+    <div class="app">
+        <header>
+            <h1>Task App</h1>
+            <div class="controls">
+                <button id="clearAll" class="ghost">Clear All</button>
+            </div>
+        </header>
+
+        <section class="card" aria-labelledby="todo-title">
+            <h2 id="todo-title" class="muted">Add a task, urgency, date, and time</h2>
+            <form id="taskForm" onsubmit="return false;" aria-describedby="form-desc">
+                <div id="form-desc" class="visually-hidden">All fields required. Validation errors will be announced.</div>
+                <div style="display:flex;gap:8px;align-items:center">
+                    <input id="taskInput" type="text" placeholder="e.g. Buy groceries" aria-label="New task" required aria-required="true" aria-invalid="false" />
+                    <!-- Urgency: number between 1 and 10 -->
+                    <div style="display:flex;flex-direction:column">
+                        <input id="urgencyInput" type="number" min="1" max="10" step="1" placeholder="Urgency (1-10)" aria-label="Urgency" required aria-required="true" aria-invalid="false" />
+                        <div id="urgencyError" class="muted" style="display:none" role="alert" aria-live="assertive">Enter a number 1–10</div>
+                    </div>
+                </div>
+                <div style="display:flex;gap:8px;align-items:center">
+                    <!-- Date must be MM/DD/YYYY -->
+                    <div style="display:flex;flex-direction:column">
+                        <input id="dateInput" type="text" placeholder="M/D/YYYY" aria-label="Date (M/D/YYYY)" required pattern="(0?[1-9]|1[0-2])/(0?[1-9]|[12][0-9]|3[01])/\d{4}" aria-required="true" aria-invalid="false" />
+                        <div id="dateError" class="muted" style="display:none" role="alert" aria-live="assertive">Use MM/DD/YYYY</div>
+                    </div>
+                    <!-- Time is 1-12 and AM/PM select -->
+                    <div style="display:flex;align-items:center;gap:8px">
+                        <div style="display:flex;flex-direction:column">
+                            <input id="timeInput" type="number" min="1" max="12" step="1" placeholder="Hour" aria-label="Time (1-12)" required aria-required="true" aria-invalid="false" />
+                            <div id="timeError" class="muted" style="display:none" role="alert" aria-live="assertive">Enter hour 1–12</div>
+                        </div>
+                        <div style="display:flex;flex-direction:column">
+                            <input id="minuteInput" type="number" min="0" max="59" step="1" placeholder="Min" aria-label="Minutes (0-59)" aria-invalid="false" />
+                            <div id="minuteError" class="muted" style="display:none" role="alert" aria-live="assertive">Enter minutes 0–59</div>
+                        </div>
+                        <select id="ampmSelect" aria-label="AM or PM">
+                            <option value="am">am</option>
+                            <option value="pm">pm</option>
+                        </select>
+                    </div>
+                    <button id="addBtn" type="submit">Add</button>
+                </div>
+            </form>
+        <style>
+        .visually-hidden {
+            position: absolute !important;
+            height: 1px; width: 1px;
+            overflow: hidden;
+            clip: rect(1px, 1px, 1px, 1px);
+            white-space: nowrap;
+        }
+        </style>
+
+            <div style="margin-top:12px">
+                <h3 class="muted">Tasks</h3>
+                <ul id="taskList" aria-live="polite"></ul>
+                <div id="empty" class="muted">No tasks yet — add one above.</div>
+            </div>
+        </section>
+
+        <footer>
+            Built with plain HTML/CSS/JS • Data saved locally in browser
+        </footer>
+    </div>
+
+    <script src="dateUtils.js"></script>
+    <script src="taskSite.js"></script>
+</body>
+</html>
