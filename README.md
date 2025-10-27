@@ -14,12 +14,6 @@ How to run
 Option A — Open the file directly (quick)
 - Double-click `taskSite.html` in File Explorer or run from PowerShell:
 
-```powershell
-Start-Process -FilePath 'c:\Users\Michael\Test_Proyect\taskSite.html'
-```
-
-Note: Opening the file directly (file://) works for this app because it uses plain script tags and localStorage. If you later switch to ES modules or fetch() calls, you may need to serve the files over HTTP.
-
 Option B — Run a simple local static server (recommended)
 - Using Python (works if Python is installed):
 
